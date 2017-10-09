@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">Github Tops</string>
+    <string name="search_language">Search a language</string>
+    <string name="cd_owner">Repository owner</string>
+    <!--errors strings -->
+    <string name="error_msg_no_internet">Not connected to internet.</string>
+    <string name="error_msg_timeout">The server took too long to respond.</string>
+    <string name="error_msg_unknown">An unexpected error occurred.</string>
+    <string name="error_msg_not_results">There aren\'t repos for: %1$s.</string>
+    <string name="error_msg_max_api_limit">Ups! Github api do not have more data for you.</string>
+    <string name="error_msg_max_api_calls">Only 10 request per minute are allowed, please wait a few seconds.</string>
+    <string name="something_went_wrong">Something went wrong.</string>
+    <string name="retry">Retry</string>
 </resources>
