@@ -2,6 +2,7 @@ package com.academiaprogramacion.githubtops.services;
 
 
 import com.academiaprogramacion.githubtops.models.Contributor;
+import com.academiaprogramacion.githubtops.models.Issue;
 import com.academiaprogramacion.githubtops.models.LanguageRepos;
 
 import java.util.List;
@@ -19,7 +20,7 @@ public interface GitHub {
             "Accept: application/vnd.github.v3+json",
             "User-Agent: GithubTopsApp"
     })
-    @GET("/repos/{owner}/{repo}/contributors")
+    @GET("/repos/{owner}/{repo}/contributors?per_page=3")
     Call<List<Contributor>> contributors(
             @Path("owner") String owner,
             @Path("repo") String repo);
@@ -28,7 +29,16 @@ public interface GitHub {
             "Accept: application/vnd.github.v3+json",
             "User-Agent: GithubTopsApp"
     })
+    @GET("/repos/{owner}/{repo}/issues?per_page=3")
+    Call<List<Issue>> issues(
+            @Path("owner") String owner,
+            @Path("repo") String repo);
+
+    @Headers({
+            "Accept: application/vnd.github.v3+json",
+            "User-Agent: GithubTopsApp"
+    })
     @GET("/search/repositories?sort=stars&order=desc&per_page=" + DEFAULT_PAGE_ITEMS)
-    Call<LanguageRepos> getLanguageRepos(@Query("page") int page,@Query("q") String language);
+    Call<LanguageRepos> getLanguageRepos(@Query("page") int page, @Query("q") String language);
 
 }

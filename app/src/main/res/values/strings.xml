@@ -9,6 +9,12 @@
     <string name="error_msg_not_results">There aren\'t repos for: %1$s.</string>
     <string name="error_msg_max_api_limit">Ups! Github api do not have more data for you.</string>
     <string name="error_msg_max_api_calls">Only 10 request per minute are allowed, please wait a few seconds.</string>
+    <string name="error_no_contributors">No contributors found in this repo.</string>
+
     <string name="something_went_wrong">Something went wrong.</string>
     <string name="retry">Retry</string>
+    <string name="three_last_issues">Three last issues</string>
+    <string name="list_of_major_contributors">List of major contributors</string>
+    <string name="msg_contributions">%1$s Contributions</string>
+
 </resources>

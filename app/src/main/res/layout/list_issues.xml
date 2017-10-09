@@ -1,0 +1,25 @@
+<!--3 last issues-->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_marginTop="@dimen/dimen_small"
+    >
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="@string/three_last_issues"
+        android:textSize="@dimen/text_large"
+        android:textColor="@color/primaryText"
+        android:padding="@dimen/dimen_small"
+        />
+    <LinearLayout
+        android:id="@+id/linear_list_issues"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+    </LinearLayout>
+</LinearLayout>

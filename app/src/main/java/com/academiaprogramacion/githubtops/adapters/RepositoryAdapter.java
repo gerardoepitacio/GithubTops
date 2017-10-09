@@ -1,6 +1,7 @@
 package com.academiaprogramacion.githubtops.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
@@ -15,6 +16,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.academiaprogramacion.githubtops.R;
+import com.academiaprogramacion.githubtops.activities.RepoDetails;
 import com.academiaprogramacion.githubtops.helpers.CircleTransform;
 import com.academiaprogramacion.githubtops.models.Repository;
 import com.bumptech.glide.Glide;
@@ -29,7 +31,7 @@ import butterknife.ButterKnife;
 /**
  * Repository recyclerview adapter
  */
-public class RepositoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder > {
+public class RepositoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder > implements View.OnClickListener{
 
     private static final String TAG = RepositoryAdapter.class.getSimpleName();
     // View Types
@@ -47,7 +49,6 @@ public class RepositoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     private int mStatusFooterItem = STATUS_LOADING;
     private String errorMsg;
 
-
     public RepositoryAdapter(Context context) {
         this.mContext = context;
         this.mRepositories = new ArrayList<Repository>();
@@ -62,6 +63,8 @@ public class RepositoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             case ITEM:
                 View viewItem = inflater.inflate(R.layout.row_repository, viewGroup, false);
                 viewHolder = new RepositoryViewHolder(viewItem);
+                viewHolder.itemView.setOnClickListener(this);
+                viewHolder.itemView.setTag(viewHolder);
                 break;
             case LOADING:
                 View viewLoading = inflater.inflate(R.layout.item_progress, viewGroup, false);
@@ -84,7 +87,7 @@ public class RepositoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 String language = repository.getLanguage();
                 int numStars = repository.getStargazersCount();
                 repoHolder.tvLanguageName.setText(language != null ? language : "<?>");
-                repoHolder.tvStartsCount.setText(String.valueOf(numStars));
+                repoHolder.tvStarsCount.setText(String.valueOf(numStars));
                 if (repository.getOwner().getAvatarUrl() != null) {
                     Glide.with(mContext).load(repository.getOwner().getAvatarUrl())
                             .crossFade()
@@ -93,6 +96,7 @@ public class RepositoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                             .transform(new CircleTransform(mContext))
                             .into(repoHolder.imageViewOwner);
                 }
+
                 break;
             case LOADING:
                 LoadingVH loadingVH = (LoadingVH) holder;
@@ -113,6 +117,16 @@ public class RepositoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 }
                 break;
         }
+    }
+
+    @Override
+    public void onClick(View view) {
+        Log.d(TAG, "onClick: on clice event");
+        RepositoryViewHolder holder = (RepositoryViewHolder) view.getTag();
+        int position = holder.getAdapterPosition();
+        Intent intent = RepoDetails.getIntentInstance(mContext, mRepositories.get(position));
+        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        mContext.startActivity(intent);
     }
 
     @Override
@@ -211,9 +225,10 @@ public class RepositoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         public TextView textViewDescription;
         @BindView(R.id.tv_language_name)
         public TextView tvLanguageName;
-        @BindView(R.id.tv_starts_count)
-        public TextView tvStartsCount;
-
+        @BindView(R.id.tv_stars_count)
+        public TextView tvStarsCount;
+        @BindView(R.id.repo_row)
+        public LinearLayout mLinearLayout;
 
         RepositoryViewHolder (View view) {
             super(view);

@@ -2,11 +2,17 @@ package com.academiaprogramacion.githubtops.helpers;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.net.ConnectivityManager;
 
 import com.academiaprogramacion.githubtops.R;
 import com.wnafee.vector.compat.ResourcesCompat;
 
 public class Utilities {
+
+    public static boolean isNetworkConnected(Context c) {
+        ConnectivityManager cm = (ConnectivityManager) c.getSystemService(Context.CONNECTIVITY_SERVICE);
+        return cm.getActiveNetworkInfo() != null;
+    }
 
     /**
      * Returns a drawable element defined by language provided

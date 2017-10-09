@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.academiaprogramacion.githubtops.activities.RepoDetails">
+
+    <include layout="@layout/toolbar" />
+    <LinearLayout
+        android:id="@+id/main_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="55dp"
+        android:orientation="vertical">
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <!--repo image-->
+                <ImageView
+                    android:id="@+id/repo_image"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="@dimen/activity_margin"
+                    android:layout_marginBottom="@dimen/activity_margin"
+                    android:layout_height="128dp"
+                    />
+                <!--repo information-->
+                <include layout="@layout/information_repo"/>
+
+                <!--lists views-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="8dp"
+                    >
+                    <include layout="@layout/list_contributors"/>
+                    <include layout="@layout/list_issues"/>
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+    <include
+        android:id="@+id/main_loading"
+        layout="@layout/activity_main_loading"
+        />
+    <include layout="@layout/error_layout"/>
+
+</FrameLayout>

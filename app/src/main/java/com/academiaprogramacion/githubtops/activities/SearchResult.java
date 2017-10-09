@@ -2,7 +2,6 @@ package com.academiaprogramacion.githubtops.activities;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -18,6 +17,7 @@ import com.academiaprogramacion.githubtops.adapters.PaginationAdapterCallback;
 import com.academiaprogramacion.githubtops.adapters.PaginationScrollListener;
 import com.academiaprogramacion.githubtops.adapters.RepositoryAdapter;
 import com.academiaprogramacion.githubtops.helpers.GitHubServiceHelper;
+import com.academiaprogramacion.githubtops.helpers.Utilities;
 import com.academiaprogramacion.githubtops.models.LanguageRepos;
 import com.academiaprogramacion.githubtops.models.Repository;
 import com.academiaprogramacion.githubtops.services.GitHub;
@@ -62,6 +62,7 @@ public class SearchResult extends ActivityWithHomeEnabled implements PaginationA
         mTextSearch = intent.getStringExtra(TEXT_QUERY);
         mGitHubApi = GitHubServiceHelper.getGitHubClient();
         setActivityTitle(mTextSearch.toUpperCase());
+
         showLoadingView();
         setupRecyclerView();
         loadFirstPage();
@@ -192,7 +193,7 @@ public class SearchResult extends ActivityWithHomeEnabled implements PaginationA
      */
     private String fetchErrorMessage(Throwable throwable) {
         String errorMsg = getResources().getString(R.string.error_msg_unknown);
-        if (!isNetworkConnected()) {
+        if (!Utilities.isNetworkConnected(getApplicationContext())) {
             errorMsg = getResources().getString(R.string.error_msg_no_internet);
         } else if (throwable instanceof TimeoutException) {
             errorMsg = getResources().getString(R.string.error_msg_timeout);
@@ -251,24 +252,12 @@ public class SearchResult extends ActivityWithHomeEnabled implements PaginationA
     public void retryPageLoad() {
         loadNextPage();
     }
-
-    // Helpers -------------------------------------------------------------------------------------
-
+    
     private void hideErrorView() {
         if (errorLayout.getVisibility() == View.VISIBLE) {
             errorLayout.setVisibility(View.GONE);
             this.mViewLoading.setVisibility(View.VISIBLE);
         }
-    }
-
-    /**
-     * Remember to add android.permission.ACCESS_NETWORK_STATE permission.
-     *
-     * @return
-     */
-    private boolean isNetworkConnected() {
-        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        return cm.getActiveNetworkInfo() != null;
     }
 
 }
