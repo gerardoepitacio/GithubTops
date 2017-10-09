@@ -16,6 +16,8 @@
         <item>"JavaScript"</item>
         <item>"PHP"</item>
         <item>"Python"</item>
+        <item>"COBOL"</item>
+        <item>"Haskell"</item>
     </array>
 
     <array name="available_languages">

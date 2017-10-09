@@ -26,6 +26,9 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+/**
+ * Repository recyclerview adapter
+ */
 public class RepositoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder > {
 
     private static final String TAG = RepositoryAdapter.class.getSimpleName();

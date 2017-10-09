@@ -11,6 +11,8 @@
     <color name="icons">#FFFFFF</color>
     <color name="divider">#BDBDBD</color>
 
+    <color name="primary">@color/colorPrimary</color>
+
     <color name="transparent">#00000000 </color>
 
     <color name="github_text">#4078c0</color>

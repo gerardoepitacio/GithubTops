@@ -27,5 +27,12 @@
     <dimen name="cardViewMargin">5dp</dimen>
     <dimen name="cardViewSeparators">3dp</dimen>
 
+    <!--menu item grid-->
+    <dimen name="divider">3dp</dimen>
+    <dimen name="horizontal_spacing">3dp</dimen>
+    <dimen name="padding_top_5dp">5dp</dimen>
+    <dimen name="image_width">90dp</dimen>
+    <dimen name="image_height">90dp</dimen>
+
 
 </resources>
